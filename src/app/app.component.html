@@ -1,0 +1,5 @@
+<h1>{{ title }}</h1>
+<button (click)="onEdit()">Click</button>
+<p *ngIf="!canEdit">The text below is read-only</p>
+<p [contentEditable]="canEdit">{{ message }}</p>
+<router-outlet></router-outlet>
