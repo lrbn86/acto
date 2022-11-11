@@ -25,14 +25,14 @@ export class AppComponent {
     if (event.repeat) return;
     const key: string = event.key;
     const actionName: string | null = this.getActionType(key);
-    this.handleAction(actionName);
+    this.handleAction(actionName, 'keydown');
   }
 
   @HostListener('window:keyup', ['$event'])
   handleKeyup(event: KeyboardEvent): void {
     const key: string = event.key;
     const actionName: string | null = this.getActionType(key);
-    this.handleAction(actionName);
+    this.handleAction(actionName, 'keyup');
   }
 
   // When the user clicks on the button
@@ -40,10 +40,31 @@ export class AppComponent {
     const target = event.currentTarget as HTMLButtonElement;
   }
 
-  handleAction(actionName: string | null): void {
+  handleAction(actionName: string | null, eventListenerType: string): void {
     if (actionName) {
       const targetButton = this.buttons.namedItem(actionName) as HTMLButtonElement;
       targetButton.classList.toggle('active');
+      if (eventListenerType === 'keydown') {
+        // Induce cooldown
+        const binding = this.keyBindings[actionName];
+        let time = binding.cooldown;
+        if (binding.isCooldown) return; 
+        binding.isCooldown = true;
+        targetButton.textContent = `${time}`;
+        targetButton.style.background = 'rgba(0, 0, 0, 0.8)';
+        targetButton.style.color = '#fff';
+        const id = setInterval(() => {
+          time--;
+          targetButton.textContent = `${time}`;
+          if (time <= 0) {
+            targetButton.textContent = binding.key; 
+            targetButton.style.background = 'rgba(0, 0, 0, 0.075)';
+        targetButton.style.color = '#000';
+            binding.isCooldown = false;
+            clearInterval(id);
+          }
+        }, 900);
+      }
     }
   }
 
