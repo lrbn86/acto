@@ -7,4 +7,9 @@ import { Component, HostListener } from '@angular/core';
 })
 export class AppComponent {
 
+  start: boolean = false;
+
+  receiveStartEvent($event: any) {
+    this.start = $event;
+  }
 }

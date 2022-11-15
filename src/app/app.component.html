@@ -1,4 +1,7 @@
 <main>
-  <app-actionbar></app-actionbar>
+  <ng-template #stay>
+    <app-main-menu (startEvent)="receiveStartEvent($event)"></app-main-menu>
+  </ng-template>
+  <app-game *ngIf="start; else stay"></app-game>
 </main>
 <router-outlet></router-outlet>

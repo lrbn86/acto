@@ -59,7 +59,7 @@ export class ActionbarComponent {
           if (time <= 0) {
             targetButton.textContent = binding.key; 
             targetButton.style.background = 'rgba(0, 0, 0, 0.075)';
-        targetButton.style.color = '#000';
+            targetButton.style.color = '#000';
             binding.isCooldown = false;
             clearInterval(id);
           }
