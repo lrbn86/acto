@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { ActionbarComponent } from './components/actionbar/actionbar.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { GameComponent } from './components/game/game.component';
+import { PlayerComponent } from './components/player/player.component';
+import { EnemyComponent } from './components/enemy/enemy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActionbarComponent,
     MainMenuComponent,
-    GameComponent
+    GameComponent,
+    PlayerComponent,
+    EnemyComponent
   ],
   imports: [
     BrowserModule,
